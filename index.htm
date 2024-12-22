@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Проект программного обеспечения платы</title>
     <style>
-        /* Стили для сайта */
+        /* Базовые стили */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f9;
             color: #333;
+            transition: background-color 0.3s, color 0.3s;
         }
         header {
             background-color: #0078d7;
@@ -21,6 +22,7 @@
         }
         header h1 {
             margin: 0;
+            font-size: 2.5em;
         }
         main {
             padding: 20px;
@@ -37,16 +39,22 @@
         a {
             color: #0078d7;
             text-decoration: none;
+            transition: color 0.3s, text-shadow 0.3s;
         }
         a:hover {
-            text-decoration: underline;
+            color: #ff9800;
+            text-shadow: 0 0 5px #ff9800;
         }
         img {
             max-width: 100%;
             height: auto;
             border: 1px solid #ddd;
             border-radius: 5px;
-            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        img:hover {
+            transform: scale(1.1); /* Увеличение */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
         .donate-buttons img {
             height: 60px;
@@ -57,9 +65,16 @@
             padding: 20px;
             background-color: #f4f4f4;
             color: #555;
+            transition: background-color 0.3s, color 0.3s;
         }
         #description {
-            white-space: pre-line; /* Для сохранения форматирования из README.md */
+            white-space: pre-line;
+            line-height: 1.6;
+        }
+        /* Кнопки для динамики */
+        .donate-buttons a:hover img {
+            transform: scale(1.1);
+            filter: brightness(1.2);
         }
     </style>
 </head>
@@ -86,7 +101,7 @@
             </ul>
         </section>
 
-        <!-- Изображения -->
+        <!-- Фотографии -->
         <section>
             <h2>Фотографии</h2>
             <figure>
