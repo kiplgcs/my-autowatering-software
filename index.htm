@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Проект автоматического полива</title>
+    <title>Проект программного обеспечения платы</title>
     <style>
         /* Стили для сайта */
         body {
@@ -58,6 +58,9 @@
             background-color: #f4f4f4;
             color: #555;
         }
+        #description {
+            white-space: pre-line; /* Для сохранения форматирования из README.md */
+        }
     </style>
 </head>
 <body>
@@ -66,18 +69,20 @@
         <p>Открытый проект для DIY-энтузиастов</p>
     </header>
     <main>
-        <!-- Описание проекта -->
+        <!-- Описание проекта из README.md -->
         <section>
             <h2>О проекте</h2>
-            <p>Добро пожаловать! Этот проект посвящен разработке платы и программного обеспечения для ЧПУ и других DIY-устройств. Здесь вы найдете файлы, инструкции и поддержку.</p>
+            <div id="description">
+                <!-- Текст из README.md будет загружен сюда -->
+                Загрузка описания...
+            </div>
         </section>
 
         <!-- Ссылки на файлы -->
         <section>
             <h2>Скачать файлы</h2>
-            <ul>
+            <ul id="file-links">
                 <li><a href="firmware.bin" download>Скачать прошивку (firmware.bin)</a></li>
-                <li><a href="README.md" download>Документация проекта (README.md)</a></li>
             </ul>
         </section>
 
@@ -99,10 +104,10 @@
             <h2>Поддержите проект</h2>
             <p>Ваши пожертвования помогают развивать проект и делиться знаниями с сообществом. Спасибо за вашу поддержку!</p>
             <div class="donate-buttons">
-                <a href="https://www.buymeacoffee.com/yourusername" target="_blank">
+                <a id="donate-bmc" href="#" target="_blank">
                     <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee">
                 </a>
-                <a href="https://yoomoney.ru/to/ваш_кошелек" target="_blank">
+                <a id="donate-yoomoney" href="#" target="_blank">
                     <img src="https://yoomoney.ru/transfer/quickpay/button-widget?targets=Поддержите%20проект&default-sum=100&button-text=11&payment-type-choice=on&mobile-payment-type-choice=on" alt="Поддержите через ЮMoney">
                 </a>
             </div>
@@ -111,5 +116,31 @@
     <footer>
         <p>&copy; 2024 Проект программного обеспечения платы. Все права защищены.</p>
     </footer>
+    <script>
+        // Динамическая загрузка README.md
+        fetch('README.md')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Ошибка загрузки README.md');
+                }
+                return response.text();
+            })
+            .then(text => {
+                document.getElementById('description').textContent = text;
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                document.getElementById('description').textContent = 'Не удалось загрузить описание проекта.';
+            });
+
+        // Динамическая установка ссылок для донатов
+        const donateLinks = {
+            bmc: 'https://www.buymeacoffee.com/yourusername', // Замените ссылкой на Buy Me a Coffee
+            yoomoney: 'https://yoomoney.ru/to/ваш_кошелек' // Замените ссылкой на ЮMoney
+        };
+
+        document.getElementById('donate-bmc').href = donateLinks.bmc;
+        document.getElementById('donate-yoomoney').href = donateLinks.yoomoney;
+    </script>
 </body>
 </html>
