@@ -45,20 +45,25 @@
             color: #ff9800;
             text-shadow: 0 0 5px #ff9800;
         }
-        img {
-            max-width: 100%;
-            height: auto;
+        /* Стили для иконок */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .gallery img {
+            width: 150px; /* Размер иконки */
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        img:hover {
-            transform: scale(1.1); /* Увеличение */
+        .gallery img:hover {
+            transform: scale(2); /* Увеличение при наведении */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-        .donate-buttons img {
-            height: 60px;
-            margin: 10px;
+            z-index: 10; /* Чтобы изображение перекрывало остальные элементы */
         }
         footer {
             text-align: center;
@@ -70,11 +75,6 @@
         #description {
             white-space: pre-line;
             line-height: 1.6;
-        }
-        /* Кнопки для динамики */
-        .donate-buttons a:hover img {
-            transform: scale(1.1);
-            filter: brightness(1.2);
         }
     </style>
 </head>
@@ -104,14 +104,10 @@
         <!-- Фотографии -->
         <section>
             <h2>Фотографии</h2>
-            <figure>
-                <img src="Готовая плата.png" alt="Готовая плата">
-                <figcaption>Готовая плата</figcaption>
-            </figure>
-            <figure>
-                <img src="Подключить часы RTC_DS1307.jpg" alt="Подключить часы RTC DS1307">
-                <figcaption>Подключение часов RTC DS1307</figcaption>
-            </figure>
+            <div class="gallery">
+                <img src="Готовая плата.png" alt="Готовая плата" title="Готовая плата">
+                <img src="Подключить часы RTC_DS1307.jpg" alt="Подключить часы RTC DS1307" title="Подключить часы RTC DS1307">
+            </div>
         </section>
 
         <!-- Донаты -->
