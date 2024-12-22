@@ -1,26 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой проект CNC</title>
+    <title>Проект программного обеспечения платы</title>
+    <style>
+        /* Стили для сайта */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: #0078d7;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        main {
+            padding: 20px;
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        section h2 {
+            border-bottom: 2px solid #0078d7;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #0078d7;
+        }
+        a {
+            color: #0078d7;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .donate-buttons img {
+            height: 60px;
+            margin: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
-    <h1>Добро пожаловать на мой сайт</h1>
-    <p>Здесь вы можете скачать мои файлы и поддержать проект.</p>
+    <header>
+        <h1>Проект программного обеспечения платы</h1>
+        <p>Открытый проект для DIY-энтузиастов</p>
+    </header>
+    <main>
+        <!-- Описание проекта -->
+        <section>
+            <h2>О проекте</h2>
+            <p>Добро пожаловать! Этот проект посвящен разработке платы и программного обеспечения для ЧПУ и других DIY-устройств. Здесь вы найдете файлы, инструкции и поддержку.</p>
+        </section>
 
-    <h2>Скачать прошивку</h2>
-    <a href="firmware.bin" download>Скачать firmware.bin</a>
+        <!-- Ссылки на файлы -->
+        <section>
+            <h2>Скачать файлы</h2>
+            <ul>
+                <li><a href="firmware.bin" download>Скачать прошивку (firmware.bin)</a></li>
+                <li><a href="README.md" download>Документация проекта (README.md)</a></li>
+            </ul>
+        </section>
 
-    <h2>Фотографии</h2>
-    <img src="photo1.jpg" alt="Фото 1" width="300">
-    <img src="photo2.jpg" alt="Фото 2" width="300">
+        <!-- Изображения -->
+        <section>
+            <h2>Фотографии</h2>
+            <figure>
+                <img src="Готовая плата.png" alt="Готовая плата">
+                <figcaption>Готовая плата</figcaption>
+            </figure>
+            <figure>
+                <img src="Подключить часы RTC_DS1307.jpg" alt="Подключить часы RTC DS1307">
+                <figcaption>Подключение часов RTC DS1307</figcaption>
+            </figure>
+        </section>
 
-    <h2>Поддержите проект</h2>
-    <p>Вы можете поддержать меня через:</p>
-    <ul>
-        <li><a href="https://www.buymeacoffee.com/yourusername" target="_blank">Buy Me a Coffee</a></li>
-        <li><a href="https://yoomoney.ru/to/ваш_кошелек" target="_blank">ЮMoney</a></li>
-    </ul>
+        <!-- Донаты -->
+        <section>
+            <h2>Поддержите проект</h2>
+            <p>Ваши пожертвования помогают развивать проект и делиться знаниями с сообществом. Спасибо за вашу поддержку!</p>
+            <div class="donate-buttons">
+                <a href="https://www.buymeacoffee.com/yourusername" target="_blank">
+                    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee">
+                </a>
+                <a href="https://yoomoney.ru/to/ваш_кошелек" target="_blank">
+                    <img src="https://yoomoney.ru/transfer/quickpay/button-widget?targets=Поддержите%20проект&default-sum=100&button-text=11&payment-type-choice=on&mobile-payment-type-choice=on" alt="Поддержите через ЮMoney">
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Проект программного обеспечения платы. Все права защищены.</p>
+    </footer>
 </body>
 </html>
