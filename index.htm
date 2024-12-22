@@ -45,7 +45,7 @@
             color: #ff9800;
             text-shadow: 0 0 5px #ff9800;
         }
-        /* Стили для иконок */
+        /* Стили для галереи */
         .gallery {
             display: flex;
             flex-wrap: wrap;
@@ -61,24 +61,27 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .gallery img:hover {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(4); /* Центрирование и увеличение */
+            transform: scale(1.1); /* Небольшое увеличение при наведении */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            z-index: 10;
-            border-radius: 0; /* Убираем скругление при увеличении */
         }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #f4f4f4;
-            color: #555;
-            transition: background-color 0.3s, color 0.3s;
+        /* Стили для увеличенного изображения */
+        .overlay {
+            display: none; /* Скрыть по умолчанию */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
-        #description {
-            white-space: pre-line;
-            line-height: 1.6;
+        .overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
@@ -88,11 +91,10 @@
         <p>Открытый проект для DIY-энтузиастов</p>
     </header>
     <main>
-        <!-- Описание проекта из README.md -->
+        <!-- Описание проекта -->
         <section>
             <h2>О проекте</h2>
             <div id="description">
-                <!-- Текст из README.md будет загружен сюда -->
                 Загрузка описания...
             </div>
         </section>
@@ -100,17 +102,17 @@
         <!-- Ссылки на файлы -->
         <section>
             <h2>Скачать файлы</h2>
-            <ul id="file-links">
+            <ul>
                 <li><a href="firmware.bin" download>Скачать прошивку (firmware.bin)</a></li>
             </ul>
         </section>
 
-        <!-- Фотографии -->
+        <!-- Галерея -->
         <section>
             <h2>Фотографии</h2>
             <div class="gallery">
-                <img src="Готовая плата.png" alt="Готовая плата" title="Готовая плата">
-                <img src="Подключить часы RTC_DS1307.jpg" alt="Подключить часы RTC DS1307" title="Подключить часы RTC DS1307">
+                <img src="Готовая плата.png" alt="Готовая плата" title="Готовая плата" onclick="showOverlay(this)">
+                <img src="Подключить часы RTC_DS1307.jpg" alt="Подключить часы RTC DS1307" title="Подключить часы RTC DS1307" onclick="showOverlay(this)">
             </div>
         </section>
 
@@ -119,10 +121,10 @@
             <h2>Поддержите проект</h2>
             <p>Ваши пожертвования помогают развивать проект и делиться знаниями с сообществом. Спасибо за вашу поддержку!</p>
             <div class="donate-buttons">
-                <a id="donate-bmc" href="#" target="_blank">
+                <a href="https://www.buymeacoffee.com/yourusername" target="_blank">
                     <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee">
                 </a>
-                <a id="donate-yoomoney" href="#" target="_blank">
+                <a href="https://yoomoney.ru/to/ваш_кошелек" target="_blank">
                     <img src="https://yoomoney.ru/transfer/quickpay/button-widget?targets=Поддержите%20проект&default-sum=100&button-text=11&payment-type-choice=on&mobile-payment-type-choice=on" alt="Поддержите через ЮMoney">
                 </a>
             </div>
@@ -131,31 +133,36 @@
     <footer>
         <p>&copy; 2024 Проект программного обеспечения платы. Все права защищены.</p>
     </footer>
+
+    <!-- Оверлей для увеличенных изображений -->
+    <div class="overlay" id="image-overlay" onclick="hideOverlay()">
+        <img id="overlay-image" src="" alt="Увеличенное изображение">
+    </div>
+
     <script>
-        // Динамическая загрузка README.md
+        // Функция для показа увеличенного изображения
+        function showOverlay(img) {
+            const overlay = document.getElementById('image-overlay');
+            const overlayImage = document.getElementById('overlay-image');
+            overlayImage.src = img.src;
+            overlay.style.display = 'flex';
+        }
+
+        // Функция для скрытия увеличенного изображения
+        function hideOverlay() {
+            const overlay = document.getElementById('image-overlay');
+            overlay.style.display = 'none';
+        }
+
+        // Загрузка README.md
         fetch('README.md')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Ошибка загрузки README.md');
-                }
-                return response.text();
-            })
+            .then(response => response.text())
             .then(text => {
                 document.getElementById('description').textContent = text;
             })
-            .catch(error => {
-                console.error('Ошибка:', error);
-                document.getElementById('description').textContent = 'Не удалось загрузить описание проекта.';
+            .catch(err => {
+                document.getElementById('description').textContent = 'Не удалось загрузить описание.';
             });
-
-        // Динамическая установка ссылок для донатов
-        const donateLinks = {
-            bmc: 'https://www.buymeacoffee.com/yourusername', // Замените ссылкой на Buy Me a Coffee
-            yoomoney: 'https://yoomoney.ru/to/ваш_кошелек' // Замените ссылкой на ЮMoney
-        };
-
-        document.getElementById('donate-bmc').href = donateLinks.bmc;
-        document.getElementById('donate-yoomoney').href = donateLinks.yoomoney;
     </script>
 </body>
 </html>
