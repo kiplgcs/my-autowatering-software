@@ -61,13 +61,9 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .gallery img:hover {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(1.5); /* Центрирование и увеличение */
-            z-index: 10;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-            border-radius: 0; /* Убираем скругление для полного размера */
+            transform: scale(4); /* Увеличение в 4 раза */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10; /* Чтобы изображение перекрывало остальные элементы */
         }
         footer {
             text-align: center;
