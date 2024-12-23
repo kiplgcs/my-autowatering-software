@@ -45,27 +45,27 @@
             color: #ff9800;
             text-shadow: 0 0 5px #ff9800;
         }
-        /* Иконки для кнопок */
-        .button img {
-            margin-right: 10px;
-            vertical-align: middle;
-            width: 20px;
-            height: 20px;
-        }
+        /* Стили для кнопок с иконками */
         .button {
             display: inline-block;
-            background-color: #0078d7;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 1em;
-            text-align: center;
-            text-decoration: none;
-            transition: background-color 0.3s, box-shadow 0.3s;
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
-        .button:hover {
-            background-color: #ff9800;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        .button img {
+            display: block;
+            width: 100%;
+            max-width: 250px; /* Максимальная ширина кнопки */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .button:hover img {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+            transform: scale(1.05);
         }
         /* Поля ввода */
         .input-field {
@@ -119,7 +119,7 @@
         <section>
             <h2>Написать сообщение</h2>
             <button class="button" onclick="toggleMessageForm()">
-                <img src="send-mail.png" alt="Иконка почты"> Написать сообщение
+                <img src="send-mail.png" alt="Написать сообщение">
             </button>
             <form id="message-form" onsubmit="sendMessage(event)">
                 <input class="input-field" type="email" id="email" placeholder="Ваш email для обратной связи" required>
@@ -133,7 +133,7 @@
             <h2>Поддержите проект</h2>
             <div class="donate-buttons">
                 <a href="https://www.donationalerts.com/r/ваш_никнейм" target="_blank" class="button">
-                    <img src="DA_Logo_Color.png" alt="DonationAlerts"> Поддержите через DonationAlerts
+                    <img src="DA_Logo_Color.png" alt="Поддержите через DonationAlerts">
                 </a>
             </div>
         </section>
