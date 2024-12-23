@@ -45,27 +45,69 @@
             color: #ff9800;
             text-shadow: 0 0 5px #ff9800;
         }
-        /* Стили для кнопок с иконками */
+        /* Стили для галереи */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .gallery img {
+            width: 120px; /* Размер иконки */
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.5);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #555;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        /* Стили для кнопок */
         .button {
             display: inline-block;
-            background-color: transparent;
-            border: none;
-            padding: 0;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+            background-color: #0078d7;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .button:hover {
+            background-color: #ff9800;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
         .button img {
-            display: block;
-            width: 100%;
-            max-width: 250px; /* Максимальная ширина кнопки */
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: box-shadow 0.3s, transform 0.3s;
-        }
-        .button:hover img {
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
-            transform: scale(1.05);
+            margin-right: 10px;
+            vertical-align: middle;
         }
         /* Поля ввода */
         .input-field {
@@ -100,11 +142,21 @@
         <section>
             <h2>Фотографии</h2>
             <div class="gallery">
-                <img src="Готовая плата.png" alt="Готовая плата">
-                <img src="Подключить часы RTC_DS1307.jpg" alt="Подключить часы RTC_DS1307">
-                <img src="Модуль прецизионных часов DS3231.png" alt="Модуль прецизионных часов DS3231">
-                <img src="Соленоидный клапан.png" alt="Соленоидный клапан">
+                <img src="Готовая плата.png" alt="Готовая плата" onclick="showOverlay(this)">
+                <img src="Подключить часы RTC_DS1307.jpg" alt="Подключить часы RTC_DS1307" onclick="showOverlay(this)">
+                <img src="Модуль прецизионных часов DS3231.png" alt="Модуль прецизионных часов DS3231" onclick="showOverlay(this)">
+                <img src="Соленоидный клапан.png" alt="Соленоидный клапан" onclick="showOverlay(this)">
             </div>
+        </section>
+
+        <!-- Конструктив -->
+        <section>
+            <h2>Конструктив</h2>
+            <ul>
+                <li><a href="https://aliexpress.ru/item/1005005926554704.html" target="_blank">Плата</a></li>
+                <li><a href="https://aliexpress.ru/item/1005006614580014.html" target="_blank">Соленоидные клапана</a></li>
+                <li><a href="https://aliexpress.ru/item/1005006685897934.html" target="_blank">Часы реального времени RTC DS1307</a></li>
+            </ul>
         </section>
 
         <!-- Ссылки на файлы -->
@@ -119,7 +171,7 @@
         <section>
             <h2>Написать сообщение</h2>
             <button class="button" onclick="toggleMessageForm()">
-                <img src="send-mail.png" alt="Написать сообщение">
+                <img src="email-icon.png" alt="Иконка почты" width="20"> Написать сообщение
             </button>
             <form id="message-form" onsubmit="sendMessage(event)">
                 <input class="input-field" type="email" id="email" placeholder="Ваш email для обратной связи" required>
@@ -133,7 +185,7 @@
             <h2>Поддержите проект</h2>
             <div class="donate-buttons">
                 <a href="https://www.donationalerts.com/r/ваш_никнейм" target="_blank" class="button">
-                    <img src="DA_Logo_Color.png" alt="Поддержите через DonationAlerts">
+                    <img src="donationalerts-icon.svg" alt="DonationAlerts" width="20"> Поддержите через DonationAlerts
                 </a>
             </div>
         </section>
@@ -142,23 +194,24 @@
         <p>&copy; 2024 Проект автополива. Все права защищены.</p>
     </footer>
 
+    <div class="overlay" id="image-overlay" onclick="hideOverlay()">
+        <img id="overlay-image" src="" alt="Увеличенное изображение">
+    </div>
+
     <script>
-        // Загрузка описания из README.md
-        document.addEventListener("DOMContentLoaded", () => {
-            fetch('README.md')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Не удалось загрузить файл.");
-                    }
-                    return response.text();
-                })
-                .then(text => {
-                    document.getElementById('description').textContent = text;
-                })
-                .catch(() => {
-                    document.getElementById('description').textContent = 'Не удалось загрузить описание.';
-                });
-        });
+        // Показ увеличенного изображения
+        function showOverlay(img) {
+            const overlay = document.getElementById('image-overlay');
+            const overlayImage = document.getElementById('overlay-image');
+            overlayImage.src = img.src;
+            overlay.style.display = 'flex';
+        }
+
+        // Скрытие увеличенного изображения
+        function hideOverlay() {
+            const overlay = document.getElementById('image-overlay');
+            overlay.style.display = 'none';
+        }
 
         // Переключение формы сообщения
         function toggleMessageForm() {
@@ -172,6 +225,7 @@
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
             alert(`Сообщение отправлено!\nEmail: ${email}\nСообщение: ${message}`);
+            // Здесь можно добавить обработку отправки на сервер
         }
     </script>
 </body>
