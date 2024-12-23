@@ -64,8 +64,8 @@
             gap: 20px;
         }
         .gallery img {
-            width: 150px; /* Размер иконки */
-            height: 150px;
+            width: 120px; /* Размер иконки (уменьшено на 20%) */
+            height: 120px;
             object-fit: cover;
             border-radius: 10px;
             border: 1px solid #ddd;
@@ -101,6 +101,21 @@
             color: #555;
             transition: background-color 0.3s, color 0.3s;
         }
+        /* Стили для кнопок донатов */
+        .donate-buttons a {
+            display: inline-block;
+            margin: 10px 0;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .donate-buttons a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .donate-buttons img {
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
     </style>
 </head>
 <body>
@@ -122,41 +137,18 @@
             <h2>Фотографии</h2>
             <div class="gallery">
                 <img src="Готовая плата.png" alt="Готовая плата" title="Готовая плата" onclick="showOverlay(this)">
-                <img src="Подключить часы RTC_DS1307.jpg" alt="Подключить модуль прецизионных часов DS3231" title="Подключить модуль прецизионных часов DS3231" onclick="showOverlay(this)">
-                <img src="Модуль прецизионных часов DS3231.png" alt="Модуль прецизионных часов DS3231" title="Модуль прецизионных часов DS3231" onclick="showOverlay(this)">
-                <img src="Соленоидный клапан.png" alt="Соленоидный клапан" title="Соленоидный клапан" onclick="showOverlay(this)">
+                <img src="Подключить часы RTC_DS1307.jpg" alt="Подключить часы RTC_DS1307" title="Подключить часы RTC_DS1307" onclick="showOverlay(this)">
             </div>
         </section>
 
-        <!-- Конструктив -->
-        <section>
-            <h2>Конструктив</h2>
-            <ul>
-                <li><a href="https://aliexpress.ru/item/1005005926554704.html?spm=a2g0o.order_list.order_list_main.94.21efa396XRtm30&gatewayAdapt=glo2rus&sku_id=12000034881672791">Плата</a></li>
-                <li><a href="https://aliexpress.ru/item/1005006614580014.html?spm=a2g2w.orderdetail.0.0.43714aa6Qbx7f2&sku_id=12000037826942695" target="_blank">Соленоидные клапана</a></li>
-                <li><a href="https://aliexpress.ru/item/1005006685897934.html?spm=a2g2w.orderdetail.0.0.768a4aa6aS4wT9&sku_id=12000038011504899">Часы реального времени RTC DS1307</a></li>
-               
-            </ul>
-        </section>
-
-        <!-- Ссылки на файлы -->
-        <section>
-            <h2>Скачать файлы</h2>
-            <ul>
-                <li><a href="firmware.bin" download>Скачать прошивку (firmware.bin)</a></li>
-            </ul>
-        </section>
-
-        <!-- Донаты -->
+        <!-- Поддержите проект -->
         <section>
             <h2>Поддержите проект</h2>
             <p>Ваши пожертвования помогают развивать проект и делиться знаниями с сообществом. Спасибо за вашу поддержку!</p>
             <div class="donate-buttons">
-                <a href="https://www.buymeacoffee.com/yourusername" target="_blank">
-                    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee">
-                </a>
-                <a href="https://yoomoney.ru/to/ваш_кошелек" target="_blank">
-                    <img src="https://yoomoney.ru/transfer/quickpay/button-widget?targets=Поддержите%20проект&default-sum=100&button-text=11&payment-type-choice=on&mobile-payment-type-choice=on" alt="Поддержите через ЮMoney">
+                <!-- DonationAlerts -->
+                <a href="https://www.donationalerts.com/r/ваш_никнейм" target="_blank">
+                    <img src="https://www.donationalerts.com/widgets/img/donate-button/default-violet.svg" alt="Поддержите через DonationAlerts" style="width: 200px;">
                 </a>
             </div>
         </section>
@@ -194,7 +186,5 @@
                 document.getElementById('description').textContent = 'Не удалось загрузить описание.';
             });
     </script>
-</body>
-</html>
 </body>
 </html>
