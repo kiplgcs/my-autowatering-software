@@ -171,13 +171,12 @@
         <section>
             <h2>Написать сообщение</h2>
             <button class="button" onclick="toggleMessageForm()">
-                <img src="email-icon.png" alt="Иконка почты" width="20"> Написать сообщение
+                <img src="send-mail.png" alt="Иконка почты" width="20"> Написать сообщение
             </button>
             <form id="message-form" onsubmit="sendMessage(event)">
                 <input class="input-field" type="email" id="email" placeholder="Ваш email для обратной связи" required>
                 <textarea class="input-field" id="message" placeholder="Ваше сообщение" required></textarea>
-                <button class="button" onclick="toggleMessageForm()">
-                <img src="send-mail.png" alt="Иконка почты" width="20"> Написать сообщение</button>
+                <button type="submit" class="button">Отправить</button>
             </form>
         </section>
 
@@ -186,7 +185,7 @@
             <h2>Поддержите проект</h2>
             <div class="donate-buttons">
                 <a href="https://www.donationalerts.com/r/ваш_никнейм" target="_blank" class="button">
-                <img src="DA_Logo_Color.png" alt="DonationAlerts" width="20"> Поддержите через DonationAlerts
+                    <img src="DA_Logo_Color.png" alt="DonationAlerts" width="20"> Поддержите через DonationAlerts
                 </a>
             </div>
         </section>
@@ -228,6 +227,17 @@
             alert(`Сообщение отправлено!\nEmail: ${email}\nСообщение: ${message}`);
             // Здесь можно добавить обработку отправки на сервер
         }
+
+        // Загрузка README.md
+        fetch('README.md')
+            .then(response => response.text())
+            .then(text => {
+                document.getElementById('description').textContent = text;
+            })
+            .catch(error => {
+                document.getElementById('description').textContent = 'Ошибка загрузки описания.';
+                console.error('Ошибка при загрузке описания:', error);
+            });
     </script>
 </body>
 </html>
