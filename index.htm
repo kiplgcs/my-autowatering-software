@@ -176,7 +176,8 @@
             <form id="message-form" onsubmit="sendMessage(event)">
                 <input class="input-field" type="email" id="email" placeholder="Ваш email для обратной связи" required>
                 <textarea class="input-field" id="message" placeholder="Ваше сообщение" required></textarea>
-                <button type="submit" class="button">Отправить</button>
+                <button class="button" onclick="toggleMessageForm()">
+                <img src="send-mail.png" alt="Иконка почты" width="20"> Написать сообщение</button>
             </form>
         </section>
 
@@ -185,7 +186,7 @@
             <h2>Поддержите проект</h2>
             <div class="donate-buttons">
                 <a href="https://www.donationalerts.com/r/ваш_никнейм" target="_blank" class="button">
-                    <img src="donationalerts-icon.svg" alt="DonationAlerts" width="20"> Поддержите через DonationAlerts
+                <img src="DA_Logo_Color.png" alt="DonationAlerts" width="20"> Поддержите через DonationAlerts
                 </a>
             </div>
         </section>
