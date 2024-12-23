@@ -45,18 +45,6 @@
             color: #ff9800;
             text-shadow: 0 0 5px #ff9800;
         }
-        /* Стили для описания проекта */
-        #description {
-            white-space: pre-line;
-            line-height: 1.8;
-            font-size: 1.1em;
-            font-family: 'Georgia', serif;
-            color: #555;
-            background: #fdfdfd;
-            padding: 15px;
-            border-left: 5px solid #0078d7;
-            border-radius: 5px;
-        }
         /* Стили для галереи */
         .gallery {
             display: flex;
@@ -64,7 +52,7 @@
             gap: 20px;
         }
         .gallery img {
-            width: 120px; /* Размер иконки (уменьшено на 20%) */
+            width: 120px; /* Размер иконки */
             height: 120px;
             object-fit: cover;
             border-radius: 10px;
@@ -101,20 +89,38 @@
             color: #555;
             transition: background-color 0.3s, color 0.3s;
         }
-        /* Стили для кнопок донатов */
-        .donate-buttons a {
+        /* Стили для кнопок */
+        .button {
             display: inline-block;
-            margin: 10px 0;
+            background-color: #0078d7;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            transition: background-color 0.3s, box-shadow 0.3s;
         }
-        .donate-buttons a:hover {
-            transform: scale(1.1);
+        .button:hover {
+            background-color: #ff9800;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-        .donate-buttons img {
-            border-radius: 10px;
-            transition: transform 0.3s ease;
+        .button img {
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        /* Поля ввода */
+        .input-field {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        #message-form {
+            display: none;
         }
     </style>
 </head>
@@ -136,10 +142,10 @@
         <section>
             <h2>Фотографии</h2>
             <div class="gallery">
-                <img src="Готовая плата.png" alt="Готовая плата" title="Готовая плата" onclick="showOverlay(this)">
-                <img src="Подключить часы RTC_DS1307.jpg" alt="Подключить часы RTC_DS1307" title="Подключить часы RTC_DS1307" onclick="showOverlay(this)">
-                <img src="Модуль прецизионных часов DS3231.png" alt="Модуль прецизионных часов DS3231" title="Модуль прецизионных часов DS3231" onclick="showOverlay(this)">
-                <img src="Соленоидный клапан.png" alt="Соленоидный клапан" title="Соленоидный клапан" onclick="showOverlay(this)">
+                <img src="Готовая плата.png" alt="Готовая плата" onclick="showOverlay(this)">
+                <img src="Подключить часы RTC_DS1307.jpg" alt="Подключить часы RTC_DS1307" onclick="showOverlay(this)">
+                <img src="Модуль прецизионных часов DS3231.png" alt="Модуль прецизионных часов DS3231" onclick="showOverlay(this)">
+                <img src="Соленоидный клапан.png" alt="Соленоидный клапан" onclick="showOverlay(this)">
             </div>
         </section>
 
@@ -153,24 +159,35 @@
             </ul>
         </section>
 
-        <!-- Поддержите проект -->
-        <section>
-            <h2>Поддержите проект</h2>
-            <p>Ваши пожертвования помогают развивать проект и делиться знаниями с сообществом. Спасибо за вашу поддержку!</p>
-            <div class="donate-buttons">
-                <!-- DonationAlerts -->
-                <a href="https://www.donationalerts.com/r/ваш_никнейм" target="_blank">
-                    <img src="https://www.donationalerts.com/widgets/img/donate-button/default-violet.svg" alt="Поддержите через DonationAlerts" style="width: 200px;">
-                </a>
-            </div>
-        </section>
-
         <!-- Ссылки на файлы -->
         <section>
             <h2>Скачать файлы</h2>
             <ul>
                 <li><a href="firmware.bin" download>Скачать прошивку (firmware.bin)</a></li>
             </ul>
+        </section>
+
+        <!-- Написать сообщение -->
+        <section>
+            <h2>Написать сообщение</h2>
+            <button class="button" onclick="toggleMessageForm()">
+                <img src="email-icon.png" alt="Иконка почты" width="20"> Написать сообщение
+            </button>
+            <form id="message-form" onsubmit="sendMessage(event)">
+                <input class="input-field" type="email" id="email" placeholder="Ваш email для обратной связи" required>
+                <textarea class="input-field" id="message" placeholder="Ваше сообщение" required></textarea>
+                <button type="submit" class="button">Отправить</button>
+            </form>
+        </section>
+
+        <!-- Поддержите проект -->
+        <section>
+            <h2>Поддержите проект</h2>
+            <div class="donate-buttons">
+                <a href="https://www.donationalerts.com/r/ваш_никнейм" target="_blank" class="button">
+                    <img src="donationalerts-icon.svg" alt="DonationAlerts" width="20"> Поддержите через DonationAlerts
+                </a>
+            </div>
         </section>
     </main>
     <footer>
@@ -196,15 +213,20 @@
             overlay.style.display = 'none';
         }
 
-        // Загрузка README.md
-        fetch('README.md')
-            .then(response => response.text())
-            .then(text => {
-                document.getElementById('description').textContent = text;
-            })
-            .catch(err => {
-                document.getElementById('description').textContent = 'Не удалось загрузить описание.';
-            });
+        // Переключение формы сообщения
+        function toggleMessageForm() {
+            const form = document.getElementById('message-form');
+            form.style.display = form.style.display === 'none' || form.style.display === '' ? 'block' : 'none';
+        }
+
+        // Отправка сообщения
+        function sendMessage(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            alert(`Сообщение отправлено!\nEmail: ${email}\nСообщение: ${message}`);
+            // Здесь можно добавить обработку отправки на сервер
+        }
     </script>
 </body>
 </html>
