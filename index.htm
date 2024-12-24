@@ -112,11 +112,11 @@
             text-decoration: none;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+            position: relative;
         }
         .button:hover {
             background: linear-gradient(45deg, #ff9800, #e68900);
             transform: translateY(-2px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
         }
         .button img {
             margin-right: 10px;
@@ -128,6 +128,20 @@
         .button:focus {
             outline: 2px solid #ff9800;
         }
+
+        /* Подсветка вокруг кнопки */
+        .button:hover::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px solid #ff9800;
+            border-radius: 25px;
+            box-shadow: 0 0 10px rgba(255, 152, 0, 0.8);
+        }
+
         /* Поля ввода */
         .input-field {
             display: block;
