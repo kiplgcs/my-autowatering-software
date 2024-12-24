@@ -96,7 +96,7 @@
         .button {
             display: inline-block;
             background: linear-gradient(45deg, #0078d7, #005bb5);
-            color: green; /* Изменён цвет текста на зелёный */
+            color: green; /* Текст кнопки зелёный */
             padding: 10px 20px;
             border-radius: 25px;
             font-size: 1em;
@@ -104,36 +104,22 @@
             text-align: center;
             text-decoration: none;
             position: relative;
-            overflow: hidden; /* Скрываем псевдоэлемент за границами кнопки */
+            overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.2s, color 0.3s;
         }
         .button:hover {
-            background: linear-gradient(45deg, #ff9800, #e68900);
+            background: white; /* Заливка белым цветом при наведении */
+            color: #0078d7; /* Цвет текста меняется на синий */
             transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
         }
         .button img {
             margin-right: 10px;
             vertical-align: middle;
         }
-        .button:hover img {
-            filter: brightness(0.9);
-        }
         .button:focus {
             outline: 2px solid #ff9800;
-        }
-
-        /* Подсветка внутри кнопки */
-        .button:hover::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 152, 0, 0.4);
-            border-radius: 25px;
-            z-index: -1; /* Подсветка будет позади текста */
         }
 
         /* Поля ввода */
