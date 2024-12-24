@@ -96,7 +96,7 @@
         .button {
             display: inline-block;
             background: linear-gradient(45deg, #0078d7, #005bb5);
-            color: white;
+            color: green; /* Изменён цвет текста на зелёный */
             padding: 10px 20px;
             border-radius: 25px;
             font-size: 1em;
@@ -123,17 +123,16 @@
             outline: 2px solid #ff9800;
         }
 
-        /* Подсветка вокруг кнопки */
+        /* Подсветка внутри кнопки */
         .button:hover::before {
             content: '';
             position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            border: 2px solid #ff9800;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 152, 0, 0.4);
             border-radius: 25px;
-            box-shadow: 0 0 10px rgba(255, 152, 0, 0.8);
             z-index: -1; /* Подсветка будет позади текста */
         }
 
