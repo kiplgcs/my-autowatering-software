@@ -66,13 +66,6 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             filter: brightness(1.2) saturate(1.5);
         }
-        /* Мобильная адаптация */
-        @media (max-width: 768px) {
-            .gallery img {
-                width: 100px;
-                height: 100px;
-            }
-        }
 
         .overlay {
             display: none;
@@ -110,9 +103,10 @@
             font-weight: bold;
             text-align: center;
             text-decoration: none;
+            position: relative;
+            overflow: hidden; /* Скрываем псевдоэлемент за границами кнопки */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
-            position: relative;
         }
         .button:hover {
             background: linear-gradient(45deg, #ff9800, #e68900);
@@ -140,6 +134,7 @@
             border: 2px solid #ff9800;
             border-radius: 25px;
             box-shadow: 0 0 10px rgba(255, 152, 0, 0.8);
+            z-index: -1; /* Подсветка будет позади текста */
         }
 
         /* Поля ввода */
@@ -161,12 +156,6 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        /* Индикатор загрузки */
-        .loading {
-            text-align: center;
-            font-size: 1.5em;
-            color: #0078d7;
         }
     </style>
 </head>
