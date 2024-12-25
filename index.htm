@@ -115,8 +115,11 @@
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
         }
         .button img {
-            margin-right: 10px;
-            vertical-align: middle;
+        margin-right: 10px; /* Отступ между текстом и иконкой */
+        vertical-align: middle; /* Выравнивание по тексту */
+        display: inline-block; /* Убедитесь, что изображение видно */
+        width: 20px; /* Размер иконки */
+        height: auto; /* Сохранение пропорций */
         }
         .button:focus {
             outline: 2px solid #ff9800;
