@@ -60,7 +60,6 @@
             border: 1px solid #ddd;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
-            loading: lazy;
         }
         .gallery img:hover {
             transform: scale(1.1);
@@ -97,7 +96,7 @@
         .button {
             display: inline-block;
             background: linear-gradient(45deg, #0078d7, #005bb5);
-            color: white; /* Текст кнопки белый */
+            color: green; /* Текст кнопки зелёный */
             padding: 10px 20px;
             border-radius: 25px;
             font-size: 1em;
@@ -110,8 +109,8 @@
             transition: background 0.3s, transform 0.2s, box-shadow 0.2s, color 0.3s;
         }
         .button:hover {
-            background: #0078d7;
-            color: #ff9800;  /* Цвет текста меняется на оранжевый */
+            background: #0078d7;/* Заливка белым цветом при наведении */
+            color: white;  /* Цвет текста меняется на синий */
             transform: translateY(-2px);
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
         }
@@ -133,20 +132,6 @@
             border-radius: 5px;
             font-size: 1em;
         }
-        /* Мобильная адаптация */
-        @media (max-width: 600px) {
-            .gallery {
-                justify-content: center;
-            }
-            .gallery img {
-                width: 100px;
-                height: 100px;
-            }
-            .button {
-                font-size: 0.9em;
-                padding: 8px 16px;
-            }
-        }
         /* Стили для раздела "О проекте" */
         #description {
             font-size: 1.2em;
@@ -158,6 +143,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
     <header>
@@ -177,10 +163,10 @@
         <section>
             <h2>Фотографии</h2>
             <div class="gallery">
-                <img src="Готовая плата.png" alt="Фотография готовой платы" onclick="showOverlay(this)" loading="lazy">
-                <img src="Подключить часы RTC_DS1307.jpg" alt="Подключение часов RTC DS1307" onclick="showOverlay(this)" loading="lazy">
-                <img src="Модуль прецизионных часов DS3231.png" alt="Модуль прецизионных часов DS3231" onclick="showOverlay(this)" loading="lazy">
-                <img src="Соленоидный клапан.png" alt="Соленоидный клапан для автополива" onclick="showOverlay(this)" loading="lazy">
+                <img src="Готовая плата.png" alt="Готовая плата" onclick="showOverlay(this)">
+                <img src="Подключить часы RTC_DS1307.jpg" alt="Подключить часы RTC_DS1307" onclick="showOverlay(this)">
+                <img src="Модуль прецизионных часов DS3231.png" alt="Модуль прецизионных часов DS3231" onclick="showOverlay(this)">
+                <img src="Соленоидный клапан.png" alt="Соленоидный клапан" onclick="showOverlay(this)">
             </div>
         </section>
 
@@ -235,11 +221,12 @@
             overlay.style.display = 'none';
         }
 
-        // Загрузка README.md
+        // Загрузка README.md и преобразование в HTML
         fetch('README.md')
             .then(response => response.text())
-            .then(text => {
-                document.getElementById('description').textContent = text;
+            .then(markdown => {
+                const htmlContent = marked.parse(markdown);
+                document.getElementById('description').innerHTML = htmlContent;
             })
             .catch(error => {
                 document.getElementById('description').textContent = 'Ошибка загрузки описания.';
